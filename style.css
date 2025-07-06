@@ -367,7 +367,7 @@ body {
 :root {
     --bg-color: #ffffff;
     --text-color: #000000;
-    --button-bg: #4e4e4e;
+    --button-bg: #ffffff;
     --progress-bg: #616161;
     --button-text: #000000;
     --button-hover: #ffe066;
