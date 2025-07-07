@@ -25,11 +25,11 @@ if(!localStorage.getItem('dark')){
     
 }
 //verifica se a tarefas já foi declarada no localstorage, se não foi basicamente inica como []
-if(!localStorage.getItem('tarefas')){
-    localStorage.setItem('tarefas',JSON.stringify({tarefas:[]}))
+if(!localStorage.getItem('tarefas2')){
+    localStorage.setItem('tarefas2',JSON.stringify({tarefas:[]}))
 }else{
     //se já foi, percorre a lista de tarefas adicionando uma dive pra cada tarefa
-    for (const elem of JSON.parse(localStorage.getItem('tarefas')).tarefas) {
+    for (const elem of JSON.parse(localStorage.getItem('tarefas2')).tarefas) {
         principal.insertAdjacentHTML(
             "beforeend",
             `
@@ -114,11 +114,11 @@ function adicionarNovaTarefa() {
     const tarefa = input.value;
     if (tarefa) {
         //clona o array tarefas do localStorage
-        let newArray = JSON.parse(localStorage.getItem('tarefas')).tarefas
+        let newArray = JSON.parse(localStorage.getItem('tarefas2')).tarefas
         //adiciona a tarefa no começo do novo array
         newArray.unshift({tarefa: tarefa, concluido: false})
         //atualiza o localStorage
-        localStorage.setItem('tarefas',JSON.stringify({tarefas: newArray}))
+        localStorage.setItem('tarefas2',JSON.stringify({tarefas: newArray}))
       input.value = ''; 
       mostrarTarefas(tarefa);
     }
@@ -163,7 +163,7 @@ function clicado(){
 }
 function editaLocalStorage(el,x){
     //clona o array tarefas do localStorage, onde se edita o valor em tarefas usando a posição do el na div.principal
-    let newArray = JSON.parse(localStorage.getItem('tarefas')).tarefas.map((element,i)=>{
+    let newArray = JSON.parse(localStorage.getItem('tarefas2')).tarefas.map((element,i)=>{
         if(i===Array.prototype.indexOf.call(principal.querySelectorAll('.obj'),el)){
             console.log(Array.prototype.indexOf.call(principal.querySelectorAll('.obj'),el), i)
             element.tarefa=x.innerHTML
@@ -172,7 +172,7 @@ function editaLocalStorage(el,x){
     })
 
     //atualiza o localStorage
-    localStorage.setItem('tarefas',JSON.stringify({tarefas:newArray}))
+    localStorage.setItem('tarefas2',JSON.stringify({tarefas:newArray}))
 }
 // basicamente, é a funçao para editar
 function edita(el){
@@ -204,14 +204,14 @@ function edita(el){
 // funçao para excluir elementos
 function exclui(elem){
     //clona o array tarefas do localStorage, filtrando o elemneto na posição do elem na div.principal
-    let newArray = JSON.parse(localStorage.getItem('tarefas')).tarefas.filter((el,i)=>{
+    let newArray = JSON.parse(localStorage.getItem('tarefas2')).tarefas.filter((el,i)=>{
         if(i===Array.prototype.indexOf.call(principal.querySelectorAll('.obj'),elem)){
             return
         }
         return el
     })
     //atualiza o localStorage
-    localStorage.setItem('tarefas',JSON.stringify({tarefas:newArray}))
+    localStorage.setItem('tarefas2',JSON.stringify({tarefas:newArray}))
     elem.remove()
     barrinha()
 }
@@ -244,14 +244,14 @@ function barrinha(element=false,switchs=false) {
         }
     }
     if(element){
-        let newArray = JSON.parse(localStorage.getItem('tarefas')).tarefas.map((el,i)=>{
+        let newArray = JSON.parse(localStorage.getItem('tarefas2')).tarefas.map((el,i)=>{
             if(i===Array.prototype.indexOf.call(principal.querySelectorAll('.obj'),element)){
                 console.log(Array.prototype.indexOf.call(principal.querySelectorAll('.obj'),element), i)
                 el.concluido=element.querySelector('input').checked
             }
             return el
         })
-        localStorage.setItem('tarefas',JSON.stringify({tarefas:newArray}))
+        localStorage.setItem('tarefas2',JSON.stringify({tarefas:newArray}))
         element.style.order=element.querySelector('input').checked?1:0
         if(element.querySelector('input').checked){
             element.classList.add('concluido')
